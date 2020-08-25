@@ -6,5 +6,6 @@ Descargar la Ultima version desde la pagina oficial:
     ::Abrir una terminal y ejecutar el siguiente comando:  
     npm install jison -g  
 
-## COMPILAR EL ARCHIVO DE JISON:
+## COMPILAR EL ARCHIVO DE JISON:  
+    ::Abrir una terminal y ejecutar el siguiente comando:  
     jison ejemplo.jison  
