@@ -1,5 +1,5 @@
 # TALLER DE JISON - COECYS 2020
-## INSTALACIÓN DE NODE.js:  
+## INSTALACIÓN DE NODE.js y NPM:  
 Descargar la Ultima version desde la pagina oficial:  
 [Node.js](https://nodejs.org/es/download/)    
 ## INSTALACIÓN DE JISON:  
