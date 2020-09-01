@@ -1,0 +1,31 @@
+class ho#la{
+	class prueba1{
+		class prueba2{
+	
+		}
+	}
+}
+class hola2{
+	class prueba3{
+		class prueba4{
+
+		}
+	}
+}
+CLASS prueba5{}
+
+
+class ho#la{
+	class prueba1{
+		class prueba2{
+	
+		}
+	}
+}
+class ho#la{
+	class prueba1{
+		class prueba2{
+	
+		}
+	}
+}

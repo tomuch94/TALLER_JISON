@@ -1,6 +1,7 @@
 /*------------------------------------------------IMPORTACIONES----------------------------------------------*/
 %{
-    const Nodo=require('./nodo_arbol');
+    //let CNodoError=require('../JavaAST/NodoError');
+    const Nodo = require("./nodo_arbol");
 %}
 %lex
 %options case-insensitive
@@ -8,7 +9,6 @@
 
 "EXPRESION"         %{ return 'tk_expresion';%}
 [0-9]+("."[0-9])?\b            %{  return 'tk_decimal';  %}
-[0-9]+\b            %{  return 'tk_entero';  %}
 "["                 %{  return 'tk_ca';  %}
 "]"                 %{  return 'tk_cc';  %}
 "+"                 %{ return 'tk_mas'; %}
@@ -37,39 +37,45 @@
 %start INICIO
 %% 
 
-INICIO: LEXPRESION EOF {};
+INICIO: LEXPRESION EOF {    $$= new Nodo("INICIO","");
+                            $$.agregarHijo($1);
+                            return $$;
+                        };
 
-LEXPRESION: EXPRESION LEXPRESION
-    | EXPRESION;
+LEXPRESION: LEXPRESION EXPRESION {  $$ = new Nodo("LEXPRESION","");
+                                    $$.agregarHijo($2);
+                                }
+    | EXPRESION { $$= $1;};
 
-EXPRESION: tk_expresion tk_ca E tk_cc tk_punto_coma {}
+EXPRESION: tk_expresion tk_ca E tk_cc tk_punto_coma { $$ = new Nodo("EXPRESION","");
+                                                        $$.agregarHijo("expresion","expresion");
+                                                        $$.agregarHijo($3);
+                                                    }
     | error tk_punto_coma {console.log("Error sintactico en la Linea: " + this._$.first_line + " en la Columna: " + this._$.first_column);};
 
-E: E tk_mas E { $$ = new Nodo("E", "");
+E: E tk_mas E { $$ = new Nodo("E","");
                         $$.agregarHijo($1);
                         $$.agregarHijo(new Nodo("+","suma"));
-                        $$.agregarHijo($3);
-                        }
-    | E tk_menos E { $$ = new Nodo("E", "");
-                        $$.agregarHijo($1);
-                        $$.agregarHijo(new Nodo("-","resta"));
-                        $$.agregarHijo($3);
-                        }
-    | E tk_multiplicar E { $$ = new Nodo("E", "");
-                        $$.agregarHijo($1);
-                        $$.agregarHijo(new Nodo("*","multiplicar"));
-                        $$.agregarHijo($3);
-                        }
-    | E tk_division E { $$ = new Nodo("E", "");
-                        $$.agregarHijo($1);
-                        $$.agregarHijo(new Nodo("/","division"));
-                        $$.agregarHijo($3);
-                        }
-    | tk_pa E tk_pc { $$ = new Nodo("E", "");
                         $$.agregarHijo($2);
                     }
-    | tk_pa error tk_pc {console.log("Error sintactico en: "+ $1 +"ERROR" +$3+ " en la Linea: " + this._$.first_line + " en la Columna: " + this._$.first_column);}
-    | tk_entero { $$ = new Nodo($1, "entero");}
-    | tk_decimal { $$ = new Nodo($1,"decimal");};
+    | E tk_menos E { $$ = new Nodo("E","");
+                        $$.agregarHijo($1);
+                        $$.agregarHijo(new Nodo("-","resta"));
+                        $$.agregarHijo($2);
+                    }
+    | E tk_multiplicar E { $$ = new Nodo("E","");
+                        $$.agregarHijo($1);
+                        $$.agregarHijo(new Nodo("*","multiplicacion"));
+                        $$.agregarHijo($2);
+                    }
+    | E tk_division E { $$ = new Nodo("E","");
+                        $$.agregarHijo($1);
+                        $$.agregarHijo(new Nodo("/","division"));
+                        $$.agregarHijo($2);
+                    }
+    | tk_pa E tk_pc { $$ = new Nodo("E","");
+                        $$.agregarHijo($2);
+                    }
+    | tk_decimal { $$ = new Nodo($1,"decimal"); };
 
 
