@@ -1,94 +1,68 @@
 var pos = 0;
 var cclass=0;
+    
+var id_n=1;
 class Recorrido_Arbol{
 
-    constructor(){
-        //this.Raiz=Raiz;
-     //console.log("\n");
-     //console.log("mostrando la raiz");
-     //console.log(this.Raiz);
-        // this.recorrer_arbolito(Raiz);
+    constructor(){ 
     }
-
-    //esto es para recorrer el arbol
-
-
     recorrer_arbolito(nodo)
     {
         var concatena;
-        //var adrian;
         if(nodo.tipo!=""){
-            concatena="<ul><li data-jstree='{ \"opened\" : true }'>"+nodo.valor+ " (" + nodo.tipo+")"+"\n";
-           // concatena = "<tr><td>"+nodo.valor+ " (" + nodo.tipo+")"+"\n";    
+            concatena="<ul><li data-jstree='{ \"opened\" : true }'>"+nodo.valor+ " (" + nodo.tipo+")"+"\n";  
         }else{
             concatena="<ul><li data-jstree='{ \"opened\" : true }'>"+nodo.valor +"\n";
-            //concatena="<tr><td>"+nodo.valor +"\n";
         }
-        //console.log(concatena);
-        //if(nodo.hijos.count>0)
-        {
             nodo.hijos.forEach(element => {
-                //lamada recursiva
                 concatena+=this.recorrer_arbolito(element);
-              //  concatena+=this.recorrer_arbolito(element);
-
-    
-                
             });
-        }
 
 
-        //concatena += "</td></tr>"+"\n";
         concatena+="</li></ul>"+"\n";
         return concatena;
-        //return adrian;
     }
 
     recorrer_arbolito2(nodo)
     {
         var concatena= "";
-        //var adrian;
-        
-            //concatena=""+nodo.valor+ " (" + nodo.tipo+")"+"\n";
-           concatena += "{ \n ";
-           concatena +=  " \" " + "nodo" + " \"" + ":";
-            
-        if(!(nodo.hijos.length==0)){
-            concatena+= " { \n";
-           // console.log("tamanolenga "+ nodo.hijos.length );
-            var tamanoarreglo = nodo.hijos.length;
-
-            //console.log("tamanoleng "+ tamanoarreglo);
-            //console.log("valor "+ nodo.hijos[tamanoarreglo -1]);
-            //console.log("valor "+ nodo.hijos[tamanoarreglo -1]);
-            //console.log("valor0  "+ nodo.hijos[0]);
-            //console.log("tamano "+ tamanoarreglo );
-            //console.log("tamanoleng "+ tamanoarreglo);
-            nodo.hijos.forEach(element => {
-                //lamada recursiva
-                
-            //console.log("elemento "+ element );
-            
-            if(nodo.hijos[tamanoarreglo -1].getTipo() == element.getTipo())
-                {
-                    concatena+=this.recorrer_arbolito2(element);
-                }else{
-                //concatena+= ",";
-                concatena+=this.recorrer_arbolito2(element);
-                }
-                //  concatena+=this.recorrer_arbolito(element); 
-            });
-        }else{
-            concatena+= "\""+"nodo"+"\""+":" + nodo.tipo;
+        if(nodo.tipo==""){
+            concatena+= "\""+nodo.valor + "\":{";         
         }
-        
-    
+        else{
+            concatena+="\""+nodo.tipo+"\""+":"+"\""+nodo.tipo+"\"";
+            return concatena;
+        }
+        var tamanoarreglo = nodo.hijos.length;
+        var contador=1;
+            nodo.hijos.forEach(element => {
+                concatena+=this.recorrer_arbolito2(element);
+                if(contador<tamanoarreglo){
 
-        
-        //concatena += "</td></tr>"+"\n";
+                    concatena+=",";
+                    
+                }
+                contador++;
+                
+            });
         concatena+="}"+"\n";
         return concatena;
-        //return adrian;
+
+    }
+
+    recorrer_arbolito3(nodo)
+    {
+        var concatena;
+        if(nodo.id==0){
+            nodo.id=id_n;
+            id_n++;
+        }
+        console.log(nodo.id + ' [label= "'+ nodo.valor +'" fillcolor="#d62728" shape="circle"];');
+            nodo.hijos.forEach(element => {
+                console.log(nodo.id+'->'+ id_n +";");
+                concatena+=this.recorrer_arbolito3(element);
+            });
+        return concatena;
     }
 }
 

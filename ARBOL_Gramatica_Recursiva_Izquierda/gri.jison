@@ -43,12 +43,14 @@ INICIO: LEXPRESION EOF {    $$= new Nodo("INICIO","");
                         };
 
 LEXPRESION: LEXPRESION EXPRESION {  $$ = new Nodo("LEXPRESION","");
+                                    $$.agregarHijo($1);
                                     $$.agregarHijo($2);
                                 }
-    | EXPRESION { $$= $1;};
+    | EXPRESION { $$ = new Nodo("LEXPRESION","");   
+                    $$.agregarHijo($1);};
 
 EXPRESION: tk_expresion tk_ca E tk_cc tk_punto_coma { $$ = new Nodo("EXPRESION","");
-                                                        $$.agregarHijo("expresion","expresion");
+                                                        $$.agregarHijo(new Nodo("expresion","expresion"));
                                                         $$.agregarHijo($3);
                                                     }
     | error tk_punto_coma {console.log("Error sintactico en la Linea: " + this._$.first_line + " en la Columna: " + this._$.first_column);};
@@ -56,26 +58,28 @@ EXPRESION: tk_expresion tk_ca E tk_cc tk_punto_coma { $$ = new Nodo("EXPRESION",
 E: E tk_mas E { $$ = new Nodo("E","");
                         $$.agregarHijo($1);
                         $$.agregarHijo(new Nodo("+","suma"));
-                        $$.agregarHijo($2);
+                        $$.agregarHijo($3);
                     }
     | E tk_menos E { $$ = new Nodo("E","");
                         $$.agregarHijo($1);
                         $$.agregarHijo(new Nodo("-","resta"));
-                        $$.agregarHijo($2);
+                        $$.agregarHijo($3);
                     }
     | E tk_multiplicar E { $$ = new Nodo("E","");
                         $$.agregarHijo($1);
                         $$.agregarHijo(new Nodo("*","multiplicacion"));
-                        $$.agregarHijo($2);
+                        $$.agregarHijo($3);
                     }
     | E tk_division E { $$ = new Nodo("E","");
                         $$.agregarHijo($1);
                         $$.agregarHijo(new Nodo("/","division"));
-                        $$.agregarHijo($2);
+                        $$.agregarHijo($3);
                     }
     | tk_pa E tk_pc { $$ = new Nodo("E","");
                         $$.agregarHijo($2);
                     }
-    | tk_decimal { $$ = new Nodo($1,"decimal"); };
+    | tk_decimal { $$ = new Nodo("E","");
+                        $$.agregarHijo(new Nodo($1,"decimal"));
+                    };
 
 

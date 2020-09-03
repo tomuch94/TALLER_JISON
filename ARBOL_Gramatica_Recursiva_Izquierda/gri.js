@@ -91,15 +91,17 @@ case 1:
 break;
 case 2:
   this.$ = new Nodo("LEXPRESION","");
+                                    this.$.agregarHijo($$[$0-1]);
                                     this.$.agregarHijo($$[$0]);
                                 
 break;
 case 3:
- this.$= $$[$0];
+ this.$ = new Nodo("LEXPRESION","");   
+                    this.$.agregarHijo($$[$0]);
 break;
 case 4:
  this.$ = new Nodo("EXPRESION","");
-                                                        this.$.agregarHijo("expresion","expresion");
+                                                        this.$.agregarHijo(new Nodo("expresion","expresion"));
                                                         this.$.agregarHijo($$[$0-2]);
                                                     
 break;
@@ -110,28 +112,28 @@ case 6:
  this.$ = new Nodo("E","");
                         this.$.agregarHijo($$[$0-2]);
                         this.$.agregarHijo(new Nodo("+","suma"));
-                        this.$.agregarHijo($$[$0-1]);
+                        this.$.agregarHijo($$[$0]);
                     
 break;
 case 7:
  this.$ = new Nodo("E","");
                         this.$.agregarHijo($$[$0-2]);
                         this.$.agregarHijo(new Nodo("-","resta"));
-                        this.$.agregarHijo($$[$0-1]);
+                        this.$.agregarHijo($$[$0]);
                     
 break;
 case 8:
  this.$ = new Nodo("E","");
                         this.$.agregarHijo($$[$0-2]);
                         this.$.agregarHijo(new Nodo("*","multiplicacion"));
-                        this.$.agregarHijo($$[$0-1]);
+                        this.$.agregarHijo($$[$0]);
                     
 break;
 case 9:
  this.$ = new Nodo("E","");
                         this.$.agregarHijo($$[$0-2]);
                         this.$.agregarHijo(new Nodo("/","division"));
-                        this.$.agregarHijo($$[$0-1]);
+                        this.$.agregarHijo($$[$0]);
                     
 break;
 case 10:
@@ -140,7 +142,9 @@ case 10:
                     
 break;
 case 11:
- this.$ = new Nodo($$[$0],"decimal"); 
+ this.$ = new Nodo("E","");
+                        this.$.agregarHijo(new Nodo($$[$0],"decimal"));
+                    
 break;
 }
 },

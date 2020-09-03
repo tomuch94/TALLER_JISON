@@ -1,5 +1,6 @@
 class Nodo_Arbol{
     constructor(valor, tipo){
+        this.id=0;
         this.valor=valor;
         this.tipo=tipo;
         this.hijos=[];
@@ -10,7 +11,7 @@ class Nodo_Arbol{
     getTipo(){
         this.tipo;
     }
-    agrerHijo(hijo){
+    agregarHijo(hijo){
         this.hijos.push(hijo);
     }
 }
