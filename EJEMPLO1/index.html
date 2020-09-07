@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="css/menu.css">
+    <link rel="stylesheet" type="text/css" href="css/principal.css">
+    <link rel="stylesheet" type="text/css" href="css/tab_salida.css">
+</head>
+
+<body>
+
+<ul id="menu" class="menu">
+    <li class="dropdown">
+        <a class="linkarchivo" href="javascript:void(0)" class="dropbtn">Archivo</a>
+        <div class="dropdown-content">
+            <a id="control" onClick="agrega_tab()" href="javascript:void(0)">Agregar_Tab</a>
+            <a id="analizar" class="analizar" onclick="analizar()" href="javascript:void(0)">Analizar</a>
+        </div>
+</ul>
+
+<br>
+
+
+<!-- DIV QUE CONTIENE LOS NOMBRES DE LAS PESTAÑAS-->
+<div id="tab" class="div_contenido"></div>
+
+<br>
+<!-- DIV QUE CONTIENE EL CONTENIDO DE LAS PESTAÑAS-->
+<div id="c_entrada"></div>
+
+
+
+
+<script src="js/tabla_errores.js"></script>
+<script src="js/simbolo.js"></script>
+<script src="js/simbolo_er.js"></script>
+<script src="js/tab_tomuch.js"></script>
+<!-- PARA LOS IDS-->
+<script src="js/id/uuid.min.js"></script>
+
+<!--PARA EL ANALIZADOR-->
+<script src="analizador/gri.js"></script>
+<script src="analizador/nodo_arbol.js"></script>
+<script src="analizador/recorrido_arbol.js"></script>
+
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="https://unpkg.com/@hpcc-js/wasm@0.3.11/dist/index.min.js"></script>
+<script src="https://unpkg.com/d3-graphviz@3.0.5/build/d3-graphviz.js"></script>
+
+
+
+
+</body>
+</html>
